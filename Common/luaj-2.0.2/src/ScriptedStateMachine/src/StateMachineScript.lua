@@ -15,6 +15,8 @@ end
 
 State_GoHome["Execute"] = function(miner)
 
+  miner:setM_iThirst(miner:getM_iThirst()+1)
+
   print ("[Lua]: Back at the shack. yer siree!")
 
   if miner:Fatigued() then
@@ -98,6 +100,8 @@ State_GoToMine["Execute"] = function(miner)
 
   miner:AddToGoldCarried(2)
 
+  miner:setM_iThirst(miner:getM_iThirst()+1)
+
   print ("[Lua]: Miner "..miner:Name().." has got "..miner:GoldCarried().." nuggets")
 
 
@@ -106,6 +110,13 @@ State_GoToMine["Execute"] = function(miner)
     print ("[Lua]: Miner "..miner:Name().." decides to go the bank, with his pockets full of nuggets")
 
     miner:GetFSM():ChangeState(State_GoToBank)
+
+   if miner:Thirsty() then
+     print ("[Lua]: Miner "..miner:Name().." boy i sure is thristy, time for a drink")
+
+     miner:GetFSM():ChangeState(GoToSaloon)
+
+    end
 
   end
 
@@ -130,6 +141,8 @@ State_GoToBank = {}
 
 State_GoToBank["Enter"] = function(miner)
 
+  miner:setM_iThirst(miner:getM_iThirst()+1)
+
   print ("[Lua]: Miner "..miner:Name().." enters bank")
 
 end
@@ -137,28 +150,16 @@ end
 
 State_GoToBank["Execute"] = function(miner)
 
-
-  if (pMiner.Wealth() >= Miner.ComfortLevel) {
-    cout("\n" + GetNameOfEntity(pMiner.ID()) + ": "
-            + "WooHoo! Rich enough for now. Back home to mah li'lle lady");
-
-    pMiner.GetFSM().ChangeState(GoHomeAndSleepTilRested.Instance());
-  } //otherwise get more gold
-  else {
-    pMiner.GetFSM().ChangeState(EnterMineAndDigForNugget.Instance());
-  }
-    }
-
   miner:AddToWealth(miner:GoldCarried())
   miner:SetGoldCarried(0)
 
 
-  if miner:Wealth() >= Miner:ComfortLevel  then
-    print ("[Lua]: Miner "..miner:Name().."WooHoo! Rich enough for now. Back home to mah li'lle lady")
-
-    print ("[Lua]: Miner "..miner:Name().." Goin to the bank. Yes siree")
-
+  if miner:Wealth() >= miner:getComfortLevel()  then
+    print ("[Lua]: Miner "..miner:Name().." I'm rich enough for now, time to go home")
     miner:GetFSM():ChangeState(State_GoHome)
+
+  else
+    miner:GetFSM():ChangeState(State_GoToMine)
 
   end
 
@@ -170,4 +171,38 @@ State_GoToBank["Exit"] = function(miner)
   print ("[Lua]: Miner "..miner:Name().." exits bank")
 
 end
+
+
+-------------------------------------------------------------------------------
+
+-- create the GoToSaloon state
+
+-------------------------------------------------------------------------------
+
+
+GoToSaloon = {}
+
+
+GoToSaloon["Enter"] = function(miner)
+
+  print ("[Lua]: Miner "..miner:Name().." enters saloon")
+
+end
+
+
+GoToSaloon["Execute"] = function(miner)
+
+  miner:BuyAndDrinkAWhiskey()
+  print ("[Lua]: Miner "..miner:Name().." That's some darn good whiskey")
+  miner:GetFSM():ChangeState(State_GoToMine)
+
+end
+
+
+GoToSaloon["Exit"] = function(miner)
+
+  print ("[Lua]: Miner "..miner:Name().." exits saloon")
+
+end
+
 

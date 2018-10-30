@@ -16,14 +16,17 @@ public class Miner extends Entity {
      * above this value a miner is sleepy
      */
     public static final int TirednessThreshold = 2;
+
     final public static int ComfortLevel = 5;
     private ScriptedStateMachine<Miner> m_pStateMachine;
     //how many nuggets the miner has in his pockets
     private int m_iGoldCarried;
     //the higher the value, the more tired the miner
     private int m_iFatigue;
+
     //above this value a miner is thirsty
     final public static int ThirstLevel = 5;
+
     private int m_iThirst;
 
     private int m_iMoneyInBank;
@@ -104,6 +107,15 @@ public class Miner extends Entity {
     public void IncreaseFatigue() {
         m_iFatigue += 1;
     }
+
+    public static int getComfortLevel() { return ComfortLevel; }
+
+    public static int getThirstLevel() { return ThirstLevel; }
+
+    public void setM_iThirst(int m_iThirst) { this.m_iThirst = m_iThirst; }
+
+    public int getM_iThirst() { return m_iThirst; }
+
 
     public ScriptedStateMachine<Miner> GetFSM() {
         return m_pStateMachine;

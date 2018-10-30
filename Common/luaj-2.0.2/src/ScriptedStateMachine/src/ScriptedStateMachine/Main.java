@@ -64,6 +64,10 @@ public class Main {
                 .def("AddToWealth", "AddToWealth")
                 .def("SetGoldCarried", "PocketsSetGoldCarriedFull")
                 .def("Wealth", "Wealth")
+                .def("getComfortLevel", "getComfortLevel")
+                .def("getThirstLevel", "getThirstLevel")
+                .def("setM_iThirst", "setM_iThirst")
+                .def("getM_iThirst", "getM_iThirst")
                 ;
     }
 
