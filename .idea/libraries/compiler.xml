@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="compiler">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Common/luaj-2.0.2/test/junit/org/luaj/vm2/compiler/lua5.1-tests.zip!/" />
+      <root url="jar://$PROJECT_DIR$/Common/luaj-2.0.2/test/junit/org/luaj/vm2/compiler/regressions.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

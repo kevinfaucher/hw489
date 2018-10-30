@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="luajvm1-tests">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Common/luaj-2.0.2/test/junit/org/luaj/vm2/vm1/luajvm1-tests.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
